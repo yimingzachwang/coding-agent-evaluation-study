@@ -1,7 +1,7 @@
 # GitHub publication plan
 
 **Purpose:** Our shared reference for preparing this project for publication.
-**Status:** Refactoring and local validation complete; public GitHub publication authorized and in progress.
+**Status:** Published publicly on GitHub; local validation and initial remote verification passed.
 **Updated:** November 8, 2026.
 
 ## Goal
@@ -99,6 +99,6 @@ The final workflow passed in an isolated Python 3.11.15 environment and a fresh 
 
 **Approved release choices:** MIT adopted for original analysis code, with collective contributor attribution; verbatim transcript, prompt, tool-description, and argument excerpts removed from publication displays. The historical audit publication copy paraphrases its two transcript quotations; the original remains in the ignored backup. Raw data remains excluded and is acquired upstream.
 
-**Remaining:** commit the verified public allowlist, create the authorized public repository, push, and verify the remote contents. Source data is not relicensed or redistributed. No further refactoring or additional research is required for the agreed scope.
+**Publication outcome:** [coding-agent-trace-evaluation](https://github.com/yimingzachwang/coding-agent-trace-evaluation) is public on `main`. Initial commit `766feb279c90ca5021dfeacdb1d1297c808f23c4` was pushed and verified against the remote branch. All 48 remote file paths and blob hashes match the approved local contents; excluded local files were not uploaded. The README, its three figures, and the notebook are publicly accessible. A follow-up documentation commit records these completed checks.
 
-**Next action:** publish to `yimingzachwang/coding-agent-trace-evaluation` on `main`, using the existing configured Git author. The owner explicitly authorized this step in the GitHub handoff. No Git repository existed at intake. Publication verification will be recorded after the push succeeds.
+**Remaining scope:** no publication blockers or further implementation work. Source data is not relicensed or redistributed. Scientific limitations and future work remain documented in the study. Local data, backups, environments, intermediate products, and handoffs remain preserved and ignored. No deployment, release, or messages to others were created.

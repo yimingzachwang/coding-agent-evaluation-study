@@ -1,6 +1,6 @@
 # Local review notes — November 8, 2026
 
-**Refactoring and local validation are complete. The owner authorized local Git initialization, commitment of the 48-file allowlist, and public GitHub publication on November 8, 2026.** MIT for original code and removal of verbatim excerpts are implemented. No Git repository existed at intake. The owner selected `yimingzachwang/coding-agent-trace-evaluation` as the destination; publication is in progress.
+**Refactoring and local validation are complete. The owner authorized local Git initialization, commitment of the 48-file allowlist, and public GitHub publication on November 8, 2026.** MIT for original code and removal of verbatim excerpts are implemented. No Git repository existed at intake. The study is now [published publicly on GitHub](https://github.com/yimingzachwang/coding-agent-trace-evaluation) on `main`; initial push and remote-content verification passed.
 
 ## Start here
 
@@ -80,4 +80,8 @@ The owner selected the authenticated local Git account `yimingzachwang` after it
 
 Reconfirmed before publication: `pip check` passed; all four helper tests passed; `check_review.py --output analysis_outputs --baseline .local_backup/analysis_outputs` passed source/artifact hashes, 84 sequential cells, 15 figures, five reconciliation checks, recorded claims, output hygiene, and retained values across ten historical tables. No analysis or display source changed, so a further full replay was unnecessary. The 48-file allowlist passed local-link, size, credential-pattern, personal-path, and notebook-output checks. The README preparation-status sentence was removed; methodological and data/license limitations remain.
 
-Commit and remote verification are pending at this checkpoint. Local source data, environments, backups, duplicate executed products, and handoffs remain preserved and excluded.
+Initial commit `766feb279c90ca5021dfeacdb1d1297c808f23c4` (`Publish agent trace evaluation study`) was pushed successfully to `origin/main`. `origin` is `https://github.com/yimingzachwang/coding-agent-trace-evaluation.git`; `main` tracks `origin/main`. Both `git ls-remote` and the connected GitHub read tools confirmed the same initial commit. Repository visibility is public. Its complete recursive tree contains exactly the 48 allowlisted files, with every blob hash matching the local commit and no excluded files present.
+
+Anonymous HTTP requests returned 200 for the repository and notebook pages. The raw README, executed root notebook, and all three README figures returned 200 and matched local bytes. A follow-up documentation commit records these verified publication checks; its final commit identity is available in Git history and the publication completion report. No analysis sources or generated results changed during publication.
+
+There are no technical publication blockers. Local source data, environments, backups, duplicate executed products, caches, editor files, and handoffs remain preserved and ignored. No website deployment, release, or messages to others were created. Scientific and data-rights limitations above remain applicable.
