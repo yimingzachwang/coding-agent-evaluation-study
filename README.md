@@ -4,7 +4,7 @@
 
 **370 attempts · 253 tasks · 7 anonymized model labels · 15 jobs**
 
-[Read the research study](docs/STUDY.md) · [Explore the computational notebook](agent_traces_analysis.ipynb) · [Data and provenance](docs/DATA.md) · [Reproduce](#reproduce-the-study)
+[Read the research study](docs/STUDY.md) · [Explore the computational notebook](agent_traces_analysis.ipynb) · [Data and provenance](docs/DATA.md) · [Python pipeline](#automated-python-pipeline) · [Reproduce](#reproduce-the-study)
 
 ## Research overview
 
@@ -54,11 +54,23 @@ Count reconciliation passes, while occurrence-aware ID checks find **13 orphan r
 | **[Computational notebook](agent_traces_analysis.ipynb)** | Full executable analysis and exploration, with verified outputs |
 | [Analysis outputs](analysis_outputs/) | Fifteen figures, concise result tables, dictionaries, findings, and checksummed manifest |
 | [Data documentation](docs/DATA.md) and [snapshot identity](data_snapshot.json) | Provenance, pinned acquisition, exact byte identity, and rights scope |
-| [Helper module](agent_traces_lib.py), [runner](scripts/run_analysis.py), and [tests](tests/test_helpers.py) | Parsing, linked tables, fresh-kernel execution, and focused checks |
+| **[Python pipeline](scripts/run_pipeline.py)** | One-command acquisition or local-data loading, analysis execution, and evidence verification |
+| [Helper module](agent_traces_lib.py), [analysis runner](scripts/run_analysis.py), and [tests](tests/) | Parsing, linked tables, fresh-kernel execution, and focused checks |
 | [Supporting material](supporting/README.md) | Historical preparation source and artifact dispositions |
 | [Review notes](REVIEW_NOTES.md) | Validation evidence and project audit dispositions |
 
 The study relates its evaluation questions to [SWE-bench](https://arxiv.org/abs/2310.06770) and [HELM](https://arxiv.org/abs/2211.09110), without asserting that this dataset belongs to either benchmark. `AUDIT.md` and `PROJECT_PLAN.md` are project records.
+
+## Automated Python pipeline
+
+[`scripts/run_pipeline.py`](scripts/run_pipeline.py) automates the workflow from an explicit Arrow snapshot to verified results. It uses the same Python interpreter for every stage and resolves project scripts independently of the launch directory:
+
+1. Use a local snapshot, or acquire the revision-pinned dataset with `--acquire`.
+2. Verify the Arrow checksum and execute all 84 notebook cells in a fresh kernel through `run_analysis.py`.
+3. Generate tables, 15 figures, an executed notebook, HTML, and a source/data/artifact manifest.
+4. Run `check_review.py` to verify execution order, reconciliation, recorded claims, hashes, and output hygiene.
+
+The notebook is the single computational source; the Python pipeline executes it without manual cell interaction. It stops with a nonzero exit code if a stage fails and refuses populated output directories. [Pipeline methods and outputs](docs/STUDY.md#34-automated-python-analysis-pipeline) are documented in the study.
 
 ## Reproduce the study
 
@@ -67,14 +79,15 @@ Use **Python 3.11**; direct dependencies are pinned in [requirements.txt](requir
 ```sh
 python3.11 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
-.venv/bin/python scripts/run_analysis.py \
+.venv/bin/python scripts/run_pipeline.py \
   --dataset /path/to/agent-traces-train.arrow \
   --output .local_runs/reproduction
 .venv/bin/python -m unittest discover -s tests -v
-.venv/bin/python scripts/check_review.py --output .local_runs/reproduction
 ```
 
-**The output directory must be new or empty.** The runner verifies the snapshot checksum, executes all 84 cells in a fresh kernel, and regenerates 15 figures, tables, an executed notebook, an HTML view, and a manifest. It resolves the project root from the script location and works from another directory when invoked by absolute path. After installation and acquisition, analysis runs offline. Saved result tables are never inputs.
+To acquire and analyze in one command, replace `--dataset /path/to/agent-traces-train.arrow` with `--acquire .local_runs/data/agent-traces-train.arrow`; the acquisition target must also be new.
+
+**The output directory must be new or empty.** The pipeline verifies the snapshot checksum, executes all 84 cells in a fresh kernel, and regenerates 15 figures, tables, an executed notebook, an HTML view, and a manifest. It resolves the project root from the script location and works from another directory when invoked by absolute path. After installation and acquisition, analysis runs offline. Saved result tables are never inputs.
 
 The root notebook retains readable outputs. Duplicate executed notebook/HTML products and Parquet checkpoints are ignored locally; regenerate them before running the evidence check, whose manifest includes those products. For interactive use, set `AGENT_TRACES_PROJECT_ROOT`, `AGENT_TRACES_DATASET`, and `AGENT_TRACES_OUTPUT` explicitly before running all cells.
 

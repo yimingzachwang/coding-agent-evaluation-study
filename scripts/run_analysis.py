@@ -69,7 +69,8 @@ def main():
     manifest = {'dataset_sha256': checksum, 'dataset_revision': identity['hub_revision'],
                 'notebook_source_sha256': source_hash,
                 'source_sha256': {str(p.relative_to(ROOT)): atl.file_sha256(p) for p in
-                                  [ROOT/'agent_traces_lib.py', Path(__file__).resolve(), ROOT/'requirements.txt']},
+                                  [ROOT/'agent_traces_lib.py', Path(__file__).resolve(),
+                                   ROOT/'scripts/run_pipeline.py', ROOT/'requirements.txt']},
                 'python': sys.version.split()[0],
                 'versions': {p: importlib.metadata.version(p) for p in
                              ['datasets','pandas','numpy','matplotlib','scikit-learn','scipy','networkx','pyarrow','nbclient','nbformat','nbconvert','ipykernel']},

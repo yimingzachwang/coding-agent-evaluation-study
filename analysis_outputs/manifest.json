@@ -4,7 +4,8 @@
   "notebook_source_sha256": "97ebe7574a40850a2904b25f4c072d696f0838b2eff97b87d32081bd57940545",
   "source_sha256": {
     "agent_traces_lib.py": "93eae425dfca03ad907bfae5cc710c7b2b0d2f0f29aeaf6091108c654e3f5def",
-    "scripts/run_analysis.py": "4d721392ff2f0c886efa87940107dc4fd987bc13ba97049e722f35a53fca4ad7",
+    "scripts/run_analysis.py": "a7546ccf7d1fd2b806825debc6e144f68d9c8602f908349bd9150eef417742a7",
+    "scripts/run_pipeline.py": "f2d9e4e34708b18e59fe1cda76188233c0267a985e40347fd0b7e2b63223b969",
     "requirements.txt": "095ed69ac1bf22f6a601a88980cdbe8bc8165596ec1c8651e85e98dd5c03b207"
   },
   "python": "3.11.15",
@@ -24,7 +25,7 @@
   },
   "code_cells_executed": 84,
   "files": {
-    "analysis.html": "d1d50b1a29a200fa12c635e4460473bd1cdc4eb2513d267bb5566a40624122eb",
+    "analysis.html": "9bafaed950167418b93a073d885adcc4519d543a94ca98fd75b26ffe2a67ef85",
     "case_studies/selected_case_studies.csv": "949ac93eb12b317088501e8adacafd9f8e9b593202fb7cb3cd805337a9f5caab",
     "data_audit/consistency_checks.csv": "85810017d67699dbb84ee41505034cc46d4fc1136db8935ec29a173dbad87bfe",
     "data_audit/data_quality_notes.csv": "e705c6bd25ec731e08fc562d53c6d3b43415f84e35095b74a96847b4e30a0fc6",
@@ -46,7 +47,7 @@
     "derived_tables/task_level_final.parquet": "910f6b65d295cf1521092563f8212ee0e444e124493332fb3448cf0a4bceef7f",
     "derived_tables/tool_calls.parquet": "e5fa5b3e7f0cb503ee0367303f4ea0fddb0937ae6fb3aee348c0f96efed95f03",
     "derived_tables/tool_definitions.parquet": "1183661702bb9365090c35435a3fdf6eef43afc8465fc5bda330cf739ce073ce",
-    "executed_analysis.ipynb": "bc625c549c11bc7d84869c0e0aadd7daf7c2944b817eb0fd323217a1a655079c",
+    "executed_analysis.ipynb": "7e70c926c009948457f9f5b7f40235150e82cbd7b4f8661f68ac9c77b96d9cc8",
     "figures/04_conversation_length_hist.png": "cfe85ede20b95ab8f327f9a8d6f9b29adade2c26d8a503ac0ab62050dbbb9988",
     "figures/07_conversation_shape.png": "c934ba8d802228861b31a5c26afe86d5cf6aa733f8225246710467af86e00b48",
     "figures/07_job_sizes_by_model.png": "a2e4b794b162eeb4142511332d8986e9c8419b2e39c3a24ef410851083f3f7ee",

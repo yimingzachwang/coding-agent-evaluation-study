@@ -91,6 +91,31 @@ The study also examines a fixed regex for success language in the last assistant
 
 Reported p-values are exploratory and unadjusted. The exact sign test applies to discordant pairs in the cyan comparison. The prompt-length p-value does not account for repeated-task and job dependence. No uncertainty intervals for classifier-score differences, bootstrap analyses, or prospective interventions are part of the reported study.
 
+### 3.4 Automated Python analysis pipeline
+
+The study includes an automated Python pipeline, [`scripts/run_pipeline.py`](../scripts/run_pipeline.py), which connects data acquisition, computational execution, and evidence verification. It runs the notebook as the shared analysis source, so interactive inspection and batch reproduction use the same parsing, models, calculations, and figure-generation logic. No manual notebook execution is required.
+
+After installing the pinned dependencies, an existing local snapshot can be analyzed and checked with one command:
+
+```sh
+.venv/bin/python scripts/run_pipeline.py \
+  --dataset /path/to/agent-traces-train.arrow \
+  --output .local_runs/reproduction
+```
+
+For acquisition followed by analysis, use `--acquire .local_runs/data/agent-traces-train.arrow` instead of `--dataset`. The acquisition stage uses the source revision and checksum in `data_snapshot.json`; its destination must be a new file outside the result directory. Acquisition requires upstream availability. With an existing verified snapshot and dependencies installed, analysis operates offline.
+
+| Pipeline stage | Implementation | Behaviour and products |
+|---|---|---|
+| **Input and acquisition** | `run_pipeline.py`, optionally [`fetch_snapshot.py`](../scripts/fetch_snapshot.py) | Checks path isolation and refuses populated result directories; uses local Arrow bytes or acquires the pinned source and verifies byte identity |
+| **Execution** | [`run_analysis.py`](../scripts/run_analysis.py), [`agent_traces_lib.py`](../agent_traces_lib.py), and the notebook | Rechecks the snapshot SHA-256, resolves project paths, and executes all 84 code cells in a fresh kernel using the pipeline's interpreter |
+| **Artifact generation** | Notebook exports and the analysis runner | Saves figures, audit CSVs, derived and aggregate tables, case identifiers, dictionaries, `findings.json`, executed notebook, HTML, and `manifest.json` |
+| **Evidence verification** | [`check_review.py`](../scripts/check_review.py) | Checks sequential execution, absence of notebook errors/stderr, 15 saved/embedded figures, five reconciliation checks, recorded headline values, source/artifact hashes, and output hygiene |
+
+The pipeline returns success only when execution and evidence verification both pass. A failed stage stops subsequent stages and returns a nonzero exit code; partial outputs remain available for diagnosis, and a retry must use a new or empty directory. The manifest records dataset identity, runtime versions, analysis and pipeline source hashes, and hashes of generated artifacts. This establishes an auditable route from the snapshot to the reported evidence. It does not add a scientific validation protocol or change the inference population.
+
+Generated products include 41 artifacts plus the manifest. Public results comprise 15 figures and concise scalar tables, dictionaries, and findings. Intermediate Parquet checkpoints and duplicate executed notebook/HTML products remain local; some intermediate tables can contain source text, so they are excluded from the public allowlist. The report is authored interpretation, while these artifacts are computational outputs. Optional focused helper tests are run separately as documented in the README.
+
 ## 4. Results
 
 ### 4.1 Coverage limits the interpretation of model differences
@@ -219,7 +244,7 @@ The practical contribution is a reproducible connection between raw records, int
 
 ## Reproducibility and evidence map
 
-The [README](../README.md#reproduce-the-study) gives the supported command. The pipeline verifies the Arrow checksum, executes all 84 analysis cells in a fresh kernel, and generates tables, 15 figures, an executed notebook, an HTML view, and an artifact manifest. An output directory must be new or empty. This narrative synthesizes existing analyses; the notebook remains the computational source.
+The [README](../README.md#reproduce-the-study) gives environment setup and the one-command [Python pipeline](../scripts/run_pipeline.py). Section 3.4 specifies its stages, failure behaviour, outputs, and provenance. The pipeline runs analysis and evidence verification automatically; the notebook remains the computational source for the findings synthesized here.
 
 | Evidence | Notebook sections | Published artifacts |
 |---|---|---|

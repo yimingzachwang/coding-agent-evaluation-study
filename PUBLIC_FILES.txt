@@ -44,6 +44,8 @@ requirements.txt
 scripts/check_review.py
 scripts/fetch_snapshot.py
 scripts/run_analysis.py
+scripts/run_pipeline.py
 supporting/README.md
 supporting/experiment_preparation.ipynb
 tests/test_helpers.py
+tests/test_pipeline.py
