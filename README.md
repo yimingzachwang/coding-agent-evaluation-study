@@ -1,50 +1,68 @@
-# Evaluating coding agents through execution traces
+# Coding-Agent Behaviour and Evaluation Reliability
 
-**Success, failure, and the limits of observational benchmarking**
+### An empirical study of execution traces
 
-What can execution traces tell us about coding-agent performance, and how do evaluation design choices affect the conclusions?
+**370 attempts · 253 tasks · 7 anonymized model labels · 15 jobs**
 
-This research case study analyzes **370 recorded attempts, 253 tasks, seven anonymized model labels, and 15 jobs** from [mfmVNfpt2q/agent-traces](https://huggingface.co/datasets/mfmVNfpt2q/agent-traces). It combines a structural data audit, linked trace tables, behavioural analysis, retrospective outcome classification, and an assessment of what the evaluation design supports. The contribution is an interpretable account of agent evaluation—including weak findings and unresolved mechanisms—with a reproducible path from raw traces to evidence.
+[Read the research study](docs/STUDY.md) · [Explore the computational notebook](agent_traces_analysis.ipynb) · [Data and provenance](docs/DATA.md) · [Reproduce](#reproduce-the-study)
 
-The analysis uses a publicly accessible, ungated Hugging Face dataset. The local Arrow file is a cached snapshot of that source, with byte identity checked by SHA-256. Reproduction instructions identify the upstream revision and checksum; readers acquire the data from Hugging Face rather than from this repository. The findings describe this snapshot, while the parsing and analysis workflow can be adapted to compatible trace datasets.
+## Research overview
 
-## Principal findings
+What do execution traces reveal about coding-agent behaviour, and which conclusions depend on the design of the evaluation itself?
 
-- **Evaluation conditions constrain model comparisons.** Raw success rates range from 35.0% to 88.3%, but task assignment is unequal. Filtering to the 79 multi-model tasks still leaves different task sets and repeat weights. These summaries describe observed performance, not a controlled capability ranking.
-- **A task-paired job gap is visible; its cause is unresolved.** Cyan succeeds on 17/18 versus 10/18 common tasks across two jobs, with seven one-directional disagreements (exploratory exact sign-test p=0.015625). Role convention, prompt date, and job co-vary. The 8/26 repeated model/task disagreements are largely cross-job variation, not an irreducible randomness estimate.
-- **Completed traces contain modest outcome signal.** Existing task-grouped classifiers reach AUC 0.699–0.762. The inputs combine recorded behaviour and configuration; this is retrospective classification, without evidence for an early-warning system, equivalent feature sets, or a predictive ceiling.
-- **Useful weak results narrow the interpretation.** First-order tool transitions look similar across outcomes. Success keywords in the last assistant message flag about 49% of OK and 54% of WA attempts with text. Prompt length has little linear association with success (r=0.023). A lexical duplicate screen cannot rule out semantic overlap or leakage.
-- **Count consistency does not establish transcript completeness.** Reward equals the OK indicator, while 90.7% of assistant messages omit `content`. An occurrence-aware audit finds 13 orphan results, 62 unanswered calls, and one reused ID, affecting 67 traces. Fifty unanswered calls occur in the terminal message; the stop mechanisms remain unverified.
+This empirical study follows coding-agent attempts from nested execution records to interpretable evidence. It combines a structural audit, linked message/action/request tables, behavioural comparisons, task-grouped retrospective classification, and an examination of coverage and run conditions. The contribution is an account of observed performance and its measurement: where traces contain useful information, where intuitive signals are weak, and what better evaluations need to record and control.
 
-![Dataset coverage and recorded outcomes](analysis_outputs/figures/07_model_status_counts.png)
-*Figure 1. Unequal model sample sizes and recorded outcome counts: OK=218, WA=121, IL=26, TL=5. The grader and IL/TL stop rules are undocumented.*
+The analysis uses the public [mfmVNfpt2q/agent-traces](https://huggingface.co/datasets/mfmVNfpt2q/agent-traces) dataset. A pinned revision and byte-verified Arrow snapshot identify the analyzed population. Model labels are anonymized; success refers to recorded `OK`, with the grader implementation unavailable. Findings are scoped to this observational collection.
 
-![Pooled tool shares by outcome](analysis_outputs/figures/10_tool_mix_by_status.png)
-*Figure 2. Action-weighted shares of the four declared tools. The five TL traces are bash-heavy and edit-light. Tool names alone do not identify semantic activity; the association does not establish a cause of failure.*
+## Questions and contributions
 
-![Pooled success and failure on mixed-outcome tasks](analysis_outputs/figures/13_pooled_success_failure.png)
-*Figure 3. Pooled attempts from 33 mixed-outcome multi-model tasks (83 attempts). Successes have a median 104.5 messages versus 177.0 for failures. This filters tasks but does not balance them or estimate a within-task adjusted effect. Outliers are hidden; the length axis is logarithmic.*
-
-## Read the study
-
-The [research notebook](agent_traces_analysis.ipynb) carries the full scientific narrative: motivation, methods, evidence, null results, cases, limitations, and implications for evaluation design. It positions the work relative to [SWE-bench](https://arxiv.org/abs/2310.06770) and [HELM](https://arxiv.org/abs/2211.09110), without claiming that this dataset belongs to either benchmark.
-
-| Entry | Role |
+| Research question | Contribution |
 |---|---|
-| `agent_traces_analysis.ipynb` | Full study, executed in order from the raw snapshot |
-| `agent_traces_lib.py` | Parsing, linked tables, reconciliation, and tool-ID audit |
-| `scripts/run_analysis.py` | Fresh-kernel execution, rendering, and artifact manifest |
-| `analysis_outputs/` | Regenerated figures, scalar tables, dictionaries, and audit files |
-| [Data documentation](docs/DATA.md), `data_snapshot.json` | Provenance, exact snapshot identity, acquisition, and rights limitations |
-| `requirements.txt`, `tests/` | Pinned direct dependencies and focused regression checks |
-| [Supporting material](supporting/README.md) | Initial exploration and historical artifact dispositions |
-| [Review notes](REVIEW_NOTES.md) | Validation evidence, audit dispositions, and publication decisions |
+| **What does the evaluation design allow us to compare?** | Coverage and repeat analysis separates observed rates from same-task job contrasts and exposes unequal assignment. |
+| **How do recorded behaviours differ across outcomes?** | Linked tables characterize activity, tool allocation, trace endpoints, request statuses, and selected cases. |
+| **Which summaries contain outcome information?** | Existing task-grouped classifiers and targeted signal checks establish both useful associations and weak results. |
 
-`PROJECT_PLAN.md` and `AUDIT.md` are project records; the local implementation handoff is preserved but ignored. The audit is historical; current dispositions are in the review notes. Authored documentation is maintained separately from generated artifacts.
+The [research study](docs/STUDY.md) develops the argument through an abstract, methods, results, cases, discussion, and limitations. The [notebook](agent_traces_analysis.ipynb) supplies all 84 executable analysis cells, complete outputs, and the exploration record.
 
-## Reproduce
+## Selected findings
 
-Use **Python 3.11**. Direct dependencies are pinned; the reviewed run uses 3.11.15 on macOS arm64. Obtain the explicit Arrow snapshot as described in [docs/DATA.md](docs/DATA.md); the raw data is intentionally not included in proposed public files.
+### Evaluation conditions matter to observed performance
+
+Raw model success rates span **35.0–88.3%**, but task assignment is unequal. Restricting to 79 multi-model tasks still leaves each label with a different task set and repeat weights. A more focused comparison finds **17/18 versus 10/18 successes** for cyan on common tasks across two jobs. Task identity is held fixed, while job, role convention, and embedded date co-vary; the cause remains unresolved.
+
+Of 26 repeated model/task groups, eight disagree on outcome. Twenty-five groups span jobs, and seven disagreements are the cyan flips. The result describes predominantly cross-job variation rather than randomness under identical conditions.
+
+### Completed traces contain outcome information
+
+Existing classifiers achieve task-grouped cross-validated **AUCs of 0.699–0.762** using completed-trace summaries, configuration, and model identity. On 33 multi-model tasks with mixed outcomes, pooled successes have a median **104.5 messages**, compared with **177.0** for pooled failures, and larger median edit fractions. These are retrospective associations; task filtering does not balance the pooled comparison.
+
+![Recorded activity and edit allocation on mixed-outcome tasks](analysis_outputs/figures/13_pooled_success_failure.png)
+
+*Figure 1. Activity and edit allocation for 83 attempts on 33 mixed-outcome tasks. Boxes show medians and interquartile ranges; outliers are hidden and message count uses a logarithmic axis. The comparison remains sensitive to task, model, and job composition. [Methods and interpretation](docs/STUDY.md#43-activity-patterns-differ-by-outcome-with-substantial-overlap).*
+
+### Weak signals and measurement gaps are substantive findings
+
+First-order tool transitions look similar across outcomes. A fixed closing-language rule flags success phrases in about **49% of OK** and **54% of WA** attempts with text. Prompt length has near-zero linear association with success (**r=0.023**). These findings limit simple shortcuts without ruling out richer representations.
+
+Count reconciliation passes, while occurrence-aware ID checks find **13 orphan results, 62 unanswered calls, and one reused ID**, affecting 67 traces. Fifty unanswered calls are terminal. Separately, **90.7% of assistant messages omit `content`**. The distinction between recorded structure and complete execution reconstruction is part of the study's measurement contribution.
+
+## Read and inspect the evidence
+
+| Resource | What it provides |
+|---|---|
+| **[Research study](docs/STUDY.md)** | Continuous narrative, methods, result tables, selected figures, discussion, references, and evidence map |
+| **[Computational notebook](agent_traces_analysis.ipynb)** | Full executable analysis and exploration, with verified outputs |
+| [Analysis outputs](analysis_outputs/) | Fifteen figures, concise result tables, dictionaries, findings, and checksummed manifest |
+| [Data documentation](docs/DATA.md) and [snapshot identity](data_snapshot.json) | Provenance, pinned acquisition, exact byte identity, and rights scope |
+| [Helper module](agent_traces_lib.py), [runner](scripts/run_analysis.py), and [tests](tests/test_helpers.py) | Parsing, linked tables, fresh-kernel execution, and focused checks |
+| [Supporting material](supporting/README.md) | Historical preparation source and artifact dispositions |
+| [Review notes](REVIEW_NOTES.md) | Validation evidence and project audit dispositions |
+
+The study relates its evaluation questions to [SWE-bench](https://arxiv.org/abs/2310.06770) and [HELM](https://arxiv.org/abs/2211.09110), without asserting that this dataset belongs to either benchmark. `AUDIT.md` and `PROJECT_PLAN.md` are project records.
+
+## Reproduce the study
+
+Use **Python 3.11**; direct dependencies are pinned in [requirements.txt](requirements.txt). The reviewed environment uses Python 3.11.15 on macOS arm64. Acquire the Arrow snapshot using the revision-pinned instructions in [docs/DATA.md](docs/DATA.md), then run:
 
 ```sh
 python3.11 -m venv .venv
@@ -56,14 +74,12 @@ python3.11 -m venv .venv
 .venv/bin/python scripts/check_review.py --output .local_runs/reproduction
 ```
 
-**The output directory must be new or empty.** The prepared review results already occupy `analysis_outputs`; choose a fresh path such as `.local_runs/reproduction` to reproduce without overwriting them. The script resolves the project root from its own location, so it also works from another directory when invoked by absolute path. Analysis runs offline after installation and acquisition and rejects a different snapshot checksum. No generated tables are used as inputs.
+**The output directory must be new or empty.** The runner verifies the snapshot checksum, executes all 84 cells in a fresh kernel, and regenerates 15 figures, tables, an executed notebook, an HTML view, and a manifest. It resolves the project root from the script location and works from another directory when invoked by absolute path. After installation and acquisition, analysis runs offline. Saved result tables are never inputs.
 
-The runner executes all 84 code cells, writes `executed_analysis.ipynb` and `analysis.html` for local viewing, regenerates figures/tables, and writes `manifest.json` with source, dataset, environment, and artifact hashes. Large intermediate Parquet files and the duplicate executed notebook/HTML are local products ignored by Git. Public results are figures, concise CSVs, dictionaries, and the manifest. The manifest also records the ignored local products; regenerate them before running verification. The root notebook retains readable outputs. Raw prompts, messages, tool descriptions, and arguments are omitted from publication displays; representative cases report identifiers, scalar summaries, and paraphrased interpretations.
+The root notebook retains readable outputs. Duplicate executed notebook/HTML products and Parquet checkpoints are ignored locally; regenerate them before running the evidence check, whose manifest includes those products. For interactive use, set `AGENT_TRACES_PROJECT_ROOT`, `AGENT_TRACES_DATASET`, and `AGENT_TRACES_OUTPUT` explicitly before running all cells.
 
-For an interactive session, set `AGENT_TRACES_PROJECT_ROOT`, `AGENT_TRACES_DATASET`, and `AGENT_TRACES_OUTPUT` to explicit paths before running all cells in a fresh kernel. The runner is the supported route for checking snapshot identity and output isolation.
+## Scope and data rights
 
-## Interpretation and licensing
+This is an observational study with unequal assignment, shared jobs, repeated tasks, small endpoint groups, and undocumented grader/stop rules. Task-grouped validation separates exact task IDs but does not establish new-job transfer or exclude semantic task overlap. Reported p-values and intervals are exploratory or descriptive. The [study limitations](docs/STUDY.md#7-limitations) explain their consequences.
 
-The snapshot is observational, with repeated tasks, shared jobs, unknown model versions, incomplete task overlap, and undocumented grader/stop rules. Grouping CV by task ID prevents exact task repeats crossing folds but does not test new-job transfer or eliminate semantic task overlap. Reported p-values and Wilson intervals are exploratory/descriptive; no bootstrap, new experiments, or additional validation protocols are implied.
-
-Original analysis code is licensed under the [MIT License](LICENSE), adopted following owner approval. The collective copyright notice identifies the project contributors without assuming a personal or company name. This license does not cover the upstream dataset or other third-party material. Raw traces and verbatim trace excerpts are excluded; readers acquire data from Hugging Face under the source's applicable terms.
+Original analysis code is covered by the [MIT License](LICENSE), with the notice `Copyright (c) 2026 The project contributors`. This does not relicense the upstream dataset or other third-party material. Raw traces and verbatim prompt, message, tool-description, or argument excerpts are excluded. Readers obtain data directly from Hugging Face under applicable source terms; a dataset-specific redistribution license remains unverified.

@@ -4,7 +4,7 @@
 
 ## Start here
 
-Read [README.md](README.md), then [the executed research notebook](agent_traces_analysis.ipynb), especially Sections 6, 8, 13–15, and 18–22. The locally generated `analysis_outputs/analysis.html` is convenient for review but excluded from proposed public files. [Data provenance](docs/DATA.md) records external acquisition and data exclusions; [LICENSE](LICENSE) contains the approved MIT license for original code.
+Read [README.md](README.md), then the [research study](docs/STUDY.md) for continuous reading or [the executed research notebook](agent_traces_analysis.ipynb) for full methods and outputs, especially Sections 6, 8, 13–15, and 18–22. The locally generated `analysis_outputs/analysis.html` is convenient for review but excluded from proposed public files. [Data provenance](docs/DATA.md) records external acquisition and data exclusions; [LICENSE](LICENSE) contains the approved MIT license for original code.
 
 ## Main changes
 
@@ -85,3 +85,13 @@ Initial commit `766feb279c90ca5021dfeacdb1d1297c808f23c4` (`Publish agent trace 
 Anonymous HTTP requests returned 200 for the repository and notebook pages. The raw README, executed root notebook, and all three README figures returned 200 and matched local bytes. A follow-up documentation commit records these verified publication checks; its final commit identity is available in Git history and the publication completion report. No analysis sources or generated results changed during publication.
 
 There are no technical publication blockers. Local source data, environments, backups, duplicate executed products, caches, editor files, and handoffs remain preserved and ignored. No website deployment, release, or messages to others were created. Scientific and data-rights limitations above remain applicable.
+
+## Expanded research presentation — November 8, 2026
+
+The study is titled **Coding-Agent Behaviour and Evaluation Reliability: An empirical study of execution traces**. The README now organizes the contribution around three research questions, connects selected findings to their interpretation, and provides clear routes into the study and executable evidence. `docs/STUDY.md` adds a roughly 3,800-word continuous research account with abstract, methods, quantitative tables, three selected figures, cases, discussion, limitations, references, and an evidence map. The notebook narrative is approximately 7,500 words, with fuller measurement rationale, estimator specifications, and integrated discussion.
+
+All 84 analysis code cells are unchanged from the published edition. All parsing and analytical helper function ASTs are unchanged; helper changes are limited to plotting colours and typography. The 15 figures were regenerated with a consistent muted palette, darker text, lighter grids, and revised spacing. No experiments, models, comparisons, ablations, or research validation protocols were added. Raw trace excerpts remain excluded. The allowlist now contains 49 files, adding only `docs/STUDY.md`.
+
+The revised notebook ran from outside the repository in a fresh kernel into a new output directory. All 84 cells completed; `check_review.py` passed all five reconciliation checks, recorded claims, source/artifact hashes, execution order, 15 embedded/saved figures, no notebook errors or stderr, and comparisons with ten historical Parquet tables. All four helper tests passed. All 24 CSV, JSON (excluding the manifest), and Parquet data artifacts are byte-identical to the previously published run; figure bytes change intentionally with the visual style. The manifest and executed notebook reflect the current source. Previous populated outputs and the pre-revision documents are preserved under ignored `.local_runs/editorial_revision/`; the verified fresh results replace the public result paths.
+
+All 15 figures were reviewed in a contact sheet and key figures at full size. The study, README, and executed notebook were rendered locally for inspection. Publication checks cover 49 explicit paths, local links and heading anchors, file sizes, notebook execution state, excluded raw formats, credential patterns, and personal machine paths. The initial-publication checks above remain a historical record of the first push.

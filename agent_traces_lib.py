@@ -34,38 +34,35 @@ KNOWN_TOOL_NAMES = {"read", "bash", "edit", "write"}
 DATE_RE = re.compile(r"Current date:\s*(\d{4}-\d{2}-\d{2})")
 
 # ---------------------------------------------------------------------------
-# Plotting style: a fixed categorical palette (8 hues)
-# used consistently across every figure in the notebook. Models are assigned
-# hues in a fixed alphabetical order (never re-cycled per chart), and status
-# categories use a semantic 4-step "state" palette so severity reads at a
-# glance: OK=recorded success, WA=recorded failure; IL/TL semantics remain interpretive.
+# Plotting style: stable category mappings shared by all study figures.
+# Status colours identify recorded labels; they do not imply verified stop rules.
 # ---------------------------------------------------------------------------
 
 CATEGORICAL_PALETTE = [
-    "#2a78d6",  # 1 blue
-    "#008300",  # 2 green
-    "#e87ba4",  # 3 magenta
-    "#eda100",  # 4 yellow
-    "#1baf7a",  # 5 aqua
-    "#eb6834",  # 6 orange
-    "#4a3aa7",  # 7 violet
-    "#e34948",  # 8 red
+    "#326A9B",  # blue
+    "#2B7A78",  # teal
+    "#9B6F8F",  # mauve
+    "#B48A3A",  # ochre
+    "#648D62",  # sage
+    "#C0785C",  # terracotta
+    "#716098",  # violet
+    "#AA4E54",  # red
 ]
 MODEL_ORDER = ["model-atlas", "model-cyan", "model-delta", "model-flint", "model-garnet", "model-orion", "model-vega"]
 MODEL_COLORS = dict(zip(MODEL_ORDER, CATEGORICAL_PALETTE))
 
 STATUS_ORDER = ["OK", "WA", "IL", "TL"]
 STATUS_COLORS = {
-    "OK": "#0ca30c",  # good
-    "WA": "#ec835a",  # serious (wrong output)
-    "IL": "#fab219",  # warning (iteration/request cap)
-    "TL": "#d03b3b",  # critical (wall-clock timeout)
+    "OK": "#2B7A78",
+    "WA": "#B76655",
+    "IL": "#B48A3A",
+    "TL": "#716098",
 }
-INK_PRIMARY = "#0b0b0b"
-INK_SECONDARY = "#52514e"
-INK_MUTED = "#898781"
-GRID_COLOR = "#e1e0d9"
-SURFACE = "#fcfcfb"
+INK_PRIMARY = "#152C3D"
+INK_SECONDARY = "#3F5361"
+INK_MUTED = "#657482"
+GRID_COLOR = "#E5EAF0"
+SURFACE = "#FFFFFF"
 
 
 def set_plot_style() -> None:
@@ -86,16 +83,20 @@ def set_plot_style() -> None:
             "xtick.color": INK_MUTED,
             "ytick.color": INK_MUTED,
             "grid.color": GRID_COLOR,
-            "grid.linewidth": 0.8,
+            "grid.linewidth": 0.65,
             "axes.grid": True,
             "axes.axisbelow": True,
             "axes.spines.top": False,
             "axes.spines.right": False,
             "font.family": "sans-serif",
             "font.sans-serif": ["Helvetica", "Arial", "DejaVu Sans"],
-            "font.size": 10.5,
+            "font.size": 11,
             "axes.titlesize": 12,
-            "axes.titleweight": "bold",
+            "axes.titleweight": "medium",
+            "axes.titlepad": 12,
+            "axes.labelsize": 10.5,
+            "xtick.labelsize": 9.5,
+            "ytick.labelsize": 9.5,
             "figure.dpi": 110,
             "legend.frameon": False,
         }

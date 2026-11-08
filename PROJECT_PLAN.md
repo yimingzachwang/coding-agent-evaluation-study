@@ -10,11 +10,11 @@ Publish a complete, coherent research project that showcases professional AI res
 
 The repository should demonstrate how we formulate research questions, understand unfamiliar data, build reliable analysis, test explanations, and communicate useful conclusions. Present the work confidently, with claims supported by the evidence.
 
-**Working title:** *Evaluating Coding Agents: Success, Failure, and Reliability Through Agent Traces*
+**Study title:** *Coding-Agent Behaviour and Evaluation Reliability: An empirical study of execution traces*
 
 **Working research question:** What can execution traces tell us about coding-agent performance, and how do evaluation design choices affect the conclusions?
 
-The title and framing can evolve as we organize and review the existing work.
+The research presentation develops three questions: comparison validity, recorded behaviour across outcomes, and the information supplied by candidate trace summaries.
 
 ## Scope
 
@@ -102,3 +102,9 @@ The final workflow passed in an isolated Python 3.11.15 environment and a fresh 
 **Publication outcome:** [coding-agent-trace-evaluation](https://github.com/yimingzachwang/coding-agent-trace-evaluation) is public on `main`. Initial commit `766feb279c90ca5021dfeacdb1d1297c808f23c4` was pushed and verified against the remote branch. All 48 remote file paths and blob hashes match the approved local contents; excluded local files were not uploaded. The README, its three figures, and the notebook are publicly accessible. A follow-up documentation commit records these completed checks.
 
 **Remaining scope:** no publication blockers or further implementation work. Source data is not relicensed or redistributed. Scientific limitations and future work remain documented in the study. Local data, backups, environments, intermediate products, and handoffs remain preserved and ignored. No deployment, release, or messages to others were created.
+
+## Research presentation revision (November 8, 2026)
+
+The research presentation now comprises an expanded README, a continuous study in `docs/STUDY.md`, and a revised executed notebook with fuller abstract, methods, results, and discussion. The shared study title is *Coding-Agent Behaviour and Evaluation Reliability*. Figures use consistent muted colours and revised typography. The notebook retains all 84 analysis code cells and model specifications; no additional research studies were added.
+
+The fresh-kernel replay and evidence checks passed. All 24 numerical data artifacts are byte-identical to the published edition; figure changes are visual. The public allowlist now has 49 files. Previous outputs and editorial source are preserved locally. Validation details and scope are recorded in `REVIEW_NOTES.md`.

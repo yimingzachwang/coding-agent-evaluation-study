@@ -39,6 +39,7 @@ analysis_outputs/findings.json
 analysis_outputs/manifest.json
 data_snapshot.json
 docs/DATA.md
+docs/STUDY.md
 requirements.txt
 scripts/check_review.py
 scripts/fetch_snapshot.py
