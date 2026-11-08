@@ -1,0 +1,20 @@
+.local_backup/
+.local_runs/
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
+.vscode/
+.env
+.env.*
+mfmVNfpt2q___agent-traces/
+*.arrow
+*.jsonl
+analysis_outputs/**/*.parquet
+analysis_outputs/*.html
+analysis_outputs/*.ipynb
+
+# Local handoff retains personal workspace paths; preserve it outside public files.
+IMPLEMENTATION_HANDOFF.md
+GITHUB_HANDOFF.md

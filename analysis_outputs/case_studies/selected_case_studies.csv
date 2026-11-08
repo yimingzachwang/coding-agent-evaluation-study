@@ -1,0 +1,13 @@
+row_id,model,job,task_id,status,reward,n_messages,n_proxy_requests,edit_frac
+1,model-cyan,run-07,aeon-toolkit__aeon-1767,WA,0,67,32,0.08823529411764706
+2,model-cyan,run-01,aeon-toolkit__aeon-1767,OK,1,101,46,0.05660377358490566
+6,model-flint,run-06,aeon-toolkit__aeon-2565,IL,0,201,100,0.0
+42,model-orion,run-05,ctfd__ctfd-2767,OK,1,109,50,0.05357142857142857
+82,model-delta,run-03,geopandas__geopandas-2298,WA,0,3,5,0.0
+203,model-vega,run-15,prometheus__client_python-547,OK,1,13,6,0.2
+218,model-atlas,run-10,pybamm-team__pybamm-529,WA,0,400,199,0.050505050505050504
+219,model-cyan,run-01,pybamm-team__pybamm-529,OK,1,176,84,0.022222222222222223
+220,model-orion,run-05,pybamm-team__pybamm-529,TL,0,169,87,0.0
+221,model-cyan,run-07,pybamm-team__pybamm-529,OK,1,239,106,0.1297709923664122
+222,model-flint,run-06,pybamm-team__pybamm-529,IL,0,201,100,0.13
+263,model-delta,run-12,pygfx__pygfx-121,TL,0,3573,1786,0.0

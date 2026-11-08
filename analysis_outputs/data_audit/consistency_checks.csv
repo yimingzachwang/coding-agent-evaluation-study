@@ -1,0 +1,6 @@
+check,n_rows_checked,n_failures,passed
+len(proxy_requests) == n_proxy_requests,370,0,True
+exploded tool-call count == row-level n_tool_calls,370,0,True
+trial column is unique per row,370,0,True
+reward == 1{status == 'OK'} for every row,370,0,True
+each job maps to exactly one model,15,0,True

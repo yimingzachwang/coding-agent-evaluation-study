@@ -1,0 +1,11 @@
+{
+  "dataset_id": "mfmVNfpt2q/agent-traces",
+  "split": "train",
+  "rows": 370,
+  "arrow_filename": "agent-traces-train.arrow",
+  "arrow_bytes": 102502768,
+  "arrow_sha256": "3ee604f3e5b607a4f8d5860ba850f6022616b01b909d881cf6c5f03f8bd09bcb",
+  "hub_revision": "1be8b9a763288ba2a4efbf8c354bc66cffa50368",
+  "revision_verification": "Hugging Face dataset API, 2026-11-08; current sha independently equals local directory name",
+  "redistribution_license": null
+}

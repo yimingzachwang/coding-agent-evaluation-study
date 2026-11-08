@@ -1,0 +1,7 @@
+issue,n_affected,severity,action_taken
+reward is fully redundant with status,370,structural,used status as primary outcome variable throughout
+trial prefix differs from full task_id (cause unverified),35,cosmetic,"trial used only as opaque row ID, never parsed"
+assistant messages missing 'content' key entirely,27571,structural (breaks naive flattening),"all parsing uses .get(), documented in Section 4"
+unrecognized tool-call names (cause unknown),18,minor,flagged via matched_known_tool=False; cause unknown
+traces ending on a 'tool' message,8,unexplained endpoint,retained; no exclusion sensitivity check performed
+IL/TL semantics undocumented in schema,31,interpretive gap,"evidence-based interpretation in Section 8.1, flagged as such throughout"

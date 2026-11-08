@@ -1,0 +1,13 @@
+table,field,type,description
+row_df,row_id,int,Positional index into the original Dataset (0..369); primary join key for every derived table
+row_df,n_messages / n_*_msgs,int,"Message counts overall and by role, from build_row_table"
+row_df,n_tool_calls / n_malformed_tool_calls,int,Total tool calls and the subset with an unrecognized function name
+row_df,edit_frac,"float [0,1]",Edit calls divided by read/bash/edit/write calls; excludes unrecognized names and sentinel (Section 10)
+row_df,frac_assistant_with_reasoning,"float [0,1]",Share of assistant turns with non-blank reasoning_content
+row_df,system_role_convention,string,'system' or 'developer' -- whether a developer message occurs
+row_df,system_prompt_date,date string,Date extracted from the system prompt template
+row_df,task_family,string,task_id with the trailing '-<issue#>' stripped -- used as a repo-level grouping variable
+row_df,failure_category,string,Descriptive status/WA-length category from Section 12
+msg_df,"row_id, msg_index, role, content_len, ...",mixed,One row per message; see Section 5
+toolcall_df,"row_id, msg_index, tc_index, name, matched_known_tool, ...",mixed,One row per tool call; see Section 5
+proxy_df,"row_id, proxy_index, status",mixed,One row per proxy request; see Section 5

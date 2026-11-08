@@ -1,0 +1,37 @@
+{
+  "n_attempts": 370,
+  "n_tasks": 253,
+  "status_counts": {
+    "OK": 218,
+    "WA": 121,
+    "IL": 26,
+    "TL": 5
+  },
+  "tasks_with_one_attempt": 161,
+  "tasks_with_repeats": 92,
+  "multi_model_tasks": 79,
+  "assistant_missing_content_fraction": 0.9068512975693188,
+  "cyan_common_tasks": 18,
+  "cyan_run01_successes": 17,
+  "cyan_run07_successes": 10,
+  "cyan_sign_test_p": 0.015625,
+  "repeated_model_task_groups": 26,
+  "repeated_groups_disagreeing": 8,
+  "repeated_groups_spanning_jobs": 25,
+  "id_anomaly_counts": {
+    "unanswered_terminal_call": 50,
+    "orphan_result": 13,
+    "unanswered_nonterminal_call": 12,
+    "reused_call_id": 1
+  },
+  "id_affected_traces": 67,
+  "short_wa_traces": 8,
+  "short_wa_with_closing_text": 2,
+  "rate_limited_traces": 29,
+  "maximum_lexical_similarity": 0.8830911732705267,
+  "text_cluster_ari": 0.386982326019343,
+  "text_cluster_count": 30,
+  "repository_families": 77,
+  "prompt_length_r": 0.02311290474818875,
+  "prompt_length_nominal_p": 0.6576641232848832
+}

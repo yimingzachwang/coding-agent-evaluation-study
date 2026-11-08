@@ -1,0 +1,9 @@
+task_id_a,task_id_b,cosine_similarity
+conda__conda-1807,conda__conda-1808,0.8830911732705267
+pybamm-team__pybamm-2862,pybamm-team__pybamm-2961,0.808580786853083
+litestar-org__polyfactory-472,litestar-org__polyfactory-587,0.7657134807894993
+litestar-org__polyfactory-472,litestar-org__polyfactory-499,0.7640248483103749
+pybamm-team__pybamm-661,pybamm-team__pybamm-962,0.7626462624275502
+googlecloudplatform__cloud-sql-python-connector-476,googlecloudplatform__cloud-sql-python-connector-475,0.7475926885175007
+litestar-org__polyfactory-479,litestar-org__polyfactory-499,0.7445956716101773
+litestar-org__polyfactory-499,litestar-org__polyfactory-587,0.7442355174308495

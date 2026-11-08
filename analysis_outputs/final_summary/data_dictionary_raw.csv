@@ -1,0 +1,12 @@
+table,field,type,description
+raw dataset,model,string,Anonymized model identifier (7 distinct values)
+raw dataset,job,string,Execution batch/run ID; maps to exactly one model (15 distinct values)
+raw dataset,trial,string,"Unique row identifier, ~= truncated task_id + suffix (generation unverified); not a grouping key"
+raw dataset,task_id,string,Task identifier resembling {org}__{repo}-{issue#}; one-to-one with observed user-prompt strings
+raw dataset,status,string (4 levels),OK / WA / IL / TL -- outcome; see Section 8.1 for evidence-based interpretation
+raw dataset,reward,int (0/1),Exactly 1{status=='OK'} -- redundant with status
+raw dataset,n_proxy_requests,int,Declared count of proxy requests; always equals len(proxy_requests)
+raw dataset,proxy_requests,list[{status:int}],HTTP-style status code per proxied request; no timestamp/method/endpoint
+raw dataset,system_prompt,string,Observed prompt templates + an embedded 'Current date' (12 distinct prompt strings)
+raw dataset,tools,list[dict],OpenAI-style tool schemas; always exactly 4 (read/bash/edit/write) and identical across all rows
+raw dataset,conversation,list[dict],Message list; roles system/developer/user/assistant/tool -- see Section 4 for per-role key structure
